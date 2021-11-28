@@ -23,7 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if os.path.exists('.env'):
     with open('.env', 'r') as eyes:
         raw_lines = eyes.readlines()
-        lines = [tuple(line.split('=', maxsplit=1)) for line in raw_lines if line.strip() and not line.startswith('#')]
+        lines = [tuple(line.strip().replace(' ', '').split('=', maxsplit=1))
+                 for line in raw_lines
+                 if line.strip() and not line.startswith('#')
+        ]
         environment = dict(lines)
     env = lambda key: environment.get(key)
 
