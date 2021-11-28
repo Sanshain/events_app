@@ -28,7 +28,7 @@ const development = !production
 const options = {
 	prerender: false,
 	source: {
-		file: 'index__prer'
+		file: 'prerender_index'
 	},
 	target: {
 		dirname: dist,
@@ -93,6 +93,6 @@ if (options.prerender) {
 	if (fs.existsSync(file)) {
 
 		execSync(`cd ${dist} && node ` + options.target.ssr);
-		console.log('prerender finished');
+		console.log('prerender finished...');
 	}
 }

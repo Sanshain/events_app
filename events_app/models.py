@@ -10,9 +10,11 @@ class Profile(AbstractUser):
 class Event(models.Model):
     name = models.CharField(max_length=50)
 
-    date_of_creation = models.DateField()
+    date_of_creation = models.DateField(auto_now=True)
     occurring_date = models.DateField()
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    __str__ = lambda self: self.name
 
 
 class Action(models.Model):
