@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from events_preoject.events_app.models import Profile, Event, Action
+from .models import Profile, Event, Action
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,9 +10,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
+    author = serializers.CharField(source='author.email', read_only=True)
     class Meta:
         model = Event
-        fields = '__all__'
+        fields = ['id', 'name', 'author']
 
 
 class ActionSerializer(serializers.HyperlinkedModelSerializer):

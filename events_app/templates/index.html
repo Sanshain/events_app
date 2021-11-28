@@ -8,6 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events App</title>
     <link rel='stylesheet' href="{% static 'release/style/bundle.css' %}" />
+    <script>
+        let authUser = null;
+        // {% if user.is_authenticated %}
+            authUser = {
+                username: '{{user.username}}',
+                isAuthor: '{{user.is_author}}'
+            }
+        // {% endif %}
+
+        let restRoutes = {
+            eventsList: '{% url "events_list" %}',
+        }
+    </script>
 </head>
 <body>
     <div id='root'></div>
