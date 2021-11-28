@@ -2,14 +2,14 @@ from django.http import HttpRequest
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework.generics import ListAPIView, GenericAPIView
+from rest_framework.generics import ListAPIView, GenericAPIView, CreateAPIView
 from rest_framework.response import Response
 
-from .models import Event
-from .serializers import EventSerializer, CreateUserProfileSerializer, ProfileSerializer
+from .models import Event, Action
+from .serializers import EventSerializer, CreateUserProfileSerializer, ProfileSerializer, ActionSerializer
 
 
-def index(request: HttpRequest): return render(request, 'index.html', {})
+def index(request: HttpRequest, *args): return render(request, 'index.html', {})
 
 
 class EventsListAPI(ListAPIView):
@@ -27,3 +27,13 @@ class RegistrationAPI(GenericAPIView):
         return Response({
             "user": ProfileSerializer(user, context=self.get_serializer_context()).data,
         })
+
+
+class ClaimCreationAPIView(CreateAPIView):
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer
+
+    def post(self, request, *args, **kwargs):
+        r = super().post(request, *args, **kwargs)
+        return r
+

@@ -29,7 +29,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     author = serializers.CharField(source='author.email', read_only=True)
     class Meta:
         model = Event
-        fields = ['id', 'name', 'author', 'occurring_date']
+        fields = ['id', 'name', 'author', 'occurring_date', 'is_claim']
 
 
 class ActionSerializer(serializers.HyperlinkedModelSerializer):

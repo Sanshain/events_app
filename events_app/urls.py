@@ -5,7 +5,7 @@ from django.db import connection
 from django.urls import path
 from rest_framework.authtoken import views
 
-from .views import index, EventsListAPI, RegistrationAPI
+from .views import index, EventsListAPI, RegistrationAPI, ClaimCreationAPIView
 
 logger = logging.Logger(__name__)
 
@@ -22,9 +22,10 @@ def queries_count(func):
 urlpatterns = [
     path('', index, name='main'),
     path('login', index),
-    path('claim', index),
+    path('claim/<int:pk>', index),
 
     path('api-token-auth', views.obtain_auth_token),
     path('events_list', queries_count(EventsListAPI.as_view()), name='events_list'),
     path('user_sign_up', RegistrationAPI.as_view(), name='user_sign_up'),
+    path('claim_create', ClaimCreationAPIView.as_view(), name='claim'),
 ]

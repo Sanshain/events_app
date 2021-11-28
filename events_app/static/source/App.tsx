@@ -27,17 +27,19 @@ interface IndexProps { }
 
 const App: FunctionalComponent<IndexProps> = (props) => {
 
+  // auth
+
   return (
     <div>
       <nav>
         <Link href="/">Events</Link>
         <Link href="/login">Login</Link>
-        {/* <Link href="/claim">Claim</Link> */}
+        {/* <Link href="/claims">Claims</Link> */}
       </nav>
       <main>
         <Router>
           <Events path="/" />
-          <Login path="/login" />
+          <Login path="/login" />          
         </Router>
       </main>
     </div>
