@@ -1,45 +1,44 @@
 import { h } from 'preact'
 import { FunctionalComponent } from 'preact';
 import { useState, useEffect } from 'preact/hooks'
-
+//@ts-ignore
+import style from "./style.css";
 
 import { styled, css, setup } from 'goober';
-
+import Router, { Link } from 'preact-router';
+import Events from './Events';
+import Login from './Login';
 setup(h);
 
 const Title = styled("h1")`
-  text-align: center;
-  color: red;
+  text-align: center;  
 `;
+
 
 type EventType = {
   id: number,
   name: string,
-  author? : string  // email
+  occurring_date: string,
+  author?: string  // email
 }
+
 
 interface IndexProps { }
 
-const App: FunctionalComponent<IndexProps> = () => {  
-  
-  let [events, setEvents] = useState<EventType[]>([]);
-
-  useEffect(() => {
-    //@ts-ignore
-    fetch(restRoutes.eventsList).then(r => r.ok ? r.json() : false).then(r => {
-      if (r) {        
-        setEvents(r)
-      }
-    })
-  });
+const App: FunctionalComponent<IndexProps> = (props) => {
 
   return (
     <div>
+      <nav>
+        <Link href="/">Events</Link>
+        <Link href="/login">Login</Link>
+        {/* <Link href="/claim">Claim</Link> */}
+      </nav>
       <main>
-        <h2>Events:</h2>
-        <ul>
-           
-        </ul>
+        <Router>
+          <Events path="/" />
+          <Login path="/login" />
+        </Router>
       </main>
     </div>
   );

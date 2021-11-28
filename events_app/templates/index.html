@@ -23,7 +23,8 @@
     </script>
 </head>
 <body>
-    <div id='root'></div>
+    {% csrf_token %}
+    <div id='root'></div>    
     <script src="{% static 'release/bundle.js' %}"></script>
 </body>
 </html>

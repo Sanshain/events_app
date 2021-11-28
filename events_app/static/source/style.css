@@ -1,4 +1,107 @@
+*{
+  /* position: relative; */
+}
+
 .title {
   color: #7a00ba;
   font-size: 30px;
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+}
+
+.events li{
+    list-style-type: none;
+    padding-top: .5em;
+    padding-bottom: 2px;
+    border-bottom: 1px gray solid;
+}
+
+
+ul{
+  margin: 2em 10%;
+}
+
+button{
+  cursor: pointer;
+}
+
+
+nav{
+  height: 2em;
+  display: flex;
+  justify-content: space-around;
+  background-color: aliceblue;
+  margin-bottom: 1em;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  align-items: center;
+}
+
+nav>a{
+  color: gray;
+  width: 100%;
+  text-align: center;  
+  line-height: 2em;
+  vertical-align: middle;
+  height: 2em;  
+}
+
+nav>a:hover{
+  background-color: #fff;
+}
+
+main{
+  margin-top: 3em;  
+  position: relative;
+}
+
+
+
+.sign_in, .sign_up{
+  /* display: none; */
+  text-align: center;
+}
+
+.sign_in>button,
+.sign_in>input,
+.sign_up>button,
+.sign_up>input{
+  display: block;
+  width: 15em;
+  margin: auto;
+  margin-top: 5px;  
+}
+
+
+.switch{
+  background-color: antiquewhite;
+  width: 5em;
+  padding: .5em;
+  text-align: center;
+  border-radius: 1em;
+  cursor: pointer;  
+
+  /* top: -3em;
+  margin: auto;
+  position  : relative;   */
+}
+
+.active{
+  display: block;
+}
+
+.switch:hover{
+  background-color: lightsalmon;
+}
+
+.errors *{
+  color: red;
+}
+
+.errors>li{
+ list-style-type: none; 
 }
