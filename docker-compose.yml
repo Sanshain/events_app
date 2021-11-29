@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    django_core:
+        build:
+            context: events_preoject
+        container_name: events_app
+        command: bash -c 'while !</dev/tcp/db/5433; do sleep 1; done; python manage.py migrate && python manage.py runserver 0.0.0.0:8000'
+        env_file: ./.env
+        image: events_app_image
+        volumes:
+            - /home/interlocution/Alente/backend:/app
+    redis:
+        image: redis
+        container_name: dev_redis
+        stdin_open: true
+        tty: true
+        ports:
+            - "6379:6379"   
+    worker:
+        build:
+            context: events_preoject
+        container_name: events_sheduler
+        restart: always
+        command: bash -c 'python manage.py rqscheduler'
+        env_file: ./.env
+        image: events_shedule_image
+        volumes:
+            - /home/interlocution/Alente/backend:/app                        
+
+volumes:
+    exclude:
