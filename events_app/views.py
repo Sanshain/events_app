@@ -1,7 +1,9 @@
 import binascii
 import os
 import uuid
+from datetime import timedelta
 
+import django_rq
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.mail import EmailMessage, send_mail
@@ -10,6 +12,8 @@ from django.http import HttpRequest
 from django.shortcuts import render
 
 # Create your views here.
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.generics import ListAPIView, GenericAPIView, CreateAPIView, RetrieveAPIView, ListCreateAPIView
@@ -18,6 +22,7 @@ from rest_framework.response import Response
 
 from .models import Event, Action, Profile
 from .serializers import EventSerializer, CreateUserProfileSerializer, ProfileSerializer, ActionSerializer
+from ..events_preoject.task import push_notification
 
 
 def index(request: HttpRequest, *args): return render(request, 'index.html', {})
@@ -26,6 +31,10 @@ def index(request: HttpRequest, *args): return render(request, 'index.html', {})
 class EventsListAPI(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = EventSerializer
+    # filter_backends = [DjangoFilterBackend]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    ordering_fields = ['occurring_date']
+    search_fields = ['name']
 
     def get_queryset(self):
         qs = Event.objects.all()
@@ -106,8 +115,13 @@ class ClaimCreationAPIView(CreateAPIView):
         send_mail(
             'New claim',
             f'New claim from {self.request.user.username} ({self.request.user.email})',
-            settings.EMAIL_HOST_USER,
+            settings.EMAIL_HOST_USER.strip(),
             [selected_event.author.email]
+        )
+
+        scheduler = django_rq.get_scheduler('default')
+        job = scheduler.enqueue_at(
+            selected_event.date_of_creation + timedelta(days=-1), push_notification, selected_event.id
         )
 
         return r

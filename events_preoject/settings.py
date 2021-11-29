@@ -49,7 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_rq',
+
     'rest_framework',
+    'django_filters',
     'rest_framework.authtoken',
     'events_app',
 ]
@@ -96,7 +99,7 @@ DATABASES = {
         'PASSWORD': env('DATABASE_PASSWORD'),
 
         'HOST': env('DATABASE_HOST') or '127.0.0.1',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 
@@ -167,5 +170,26 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'PASSWORD': '',
+        'DEFAULT_TIMEOUT': 360,
+    },
+    # 'high': {
+    #     'URL': 'redis://192.168.99.101:6379/0' if DEBUG else 'redis://redis:6379/0',
+    #     'DEFAULT_TIMEOUT': 500,
+    # },
+    # 'low': {
+    #     'HOST': 'localhost',
+    #     'PORT': 6379,
+    #     'DB': 0,
+    # }
 }

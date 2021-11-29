@@ -1,3 +1,4 @@
+import django_filters
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
 from rest_framework import serializers
@@ -30,6 +31,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
 
     author = serializers.CharField(source='author.email', read_only=True)
     claimed = serializers.BooleanField(allow_null=True)
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
 
     class Meta:
         model = Event

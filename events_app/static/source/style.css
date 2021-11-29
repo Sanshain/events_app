@@ -142,3 +142,19 @@ input[type="file"]{
   cursor: pointer;
   text-align: center;  
 }
+
+#search{
+  width : 70%;
+  margin: auto;
+  display: block;
+}
+
+.sort{
+    left: 15%;
+    position: relative;
+    top: 1em;
+    background: lightgreen;
+    padding: .5em;
+    border-radius: .3em;
+    cursor: pointer;
+}
