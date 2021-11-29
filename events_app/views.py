@@ -22,7 +22,8 @@ from rest_framework.response import Response
 
 from .models import Event, Action, Profile
 from .serializers import EventSerializer, CreateUserProfileSerializer, ProfileSerializer, ActionSerializer
-from ..events_preoject.task import push_notification
+# from ..events_preoject.task import push_notification
+from .tasks import push_notification
 
 
 def index(request: HttpRequest, *args): return render(request, 'index.html', {})

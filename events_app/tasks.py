@@ -4,7 +4,7 @@ import django_rq
 from django.conf import settings
 from django.core.mail import send_mail
 
-from ..events_app.models import Event, Action
+from .models import Action
 
 scheduler = django_rq.get_scheduler('default')
 
