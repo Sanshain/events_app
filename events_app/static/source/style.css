@@ -30,7 +30,7 @@ button{
 
 
 nav{
-  height: 2em;
+  height: 3em;
   display: flex;
   justify-content: space-around;
   background-color: aliceblue;
@@ -45,9 +45,9 @@ nav>a{
   color: gray;
   width: 100%;
   text-align: center;  
-  line-height: 2em;
+  line-height: 3em;
   vertical-align: middle;
-  height: 2em;  
+  height: 3em;  
 }
 
 nav>a:hover{
@@ -55,17 +55,23 @@ nav>a:hover{
 }
 
 main{
-  margin-top: 3em;  
+  margin-top: 4.5em;  
   position: relative;
 }
 
 
+.new_event{
+  margin-bottom: 2em;
+  text-align: center;
+}
 
 .sign_in, .sign_up{
   /* display: none; */
   text-align: center;
 }
 
+.new_event>input,
+.new_event>button,
 .sign_in>button,
 .sign_in>input,
 .sign_up>button,
@@ -76,6 +82,20 @@ main{
   margin-top: 5px;  
 }
 
+.new_event>input,
+.new_event>button{
+  margin-bottom: 1em;
+  margin-bottom: 1em;
+  border-radius: .5em;
+  border: 1px gray solid;
+  padding: .5em;
+  min-width: 30%;  
+}
+
+.new_event>button{
+  margin-top: 2em;
+  min-width: 31%;
+}
 
 .switch{
   background-color: antiquewhite;
@@ -84,6 +104,8 @@ main{
   text-align: center;
   border-radius: 1em;
   cursor: pointer;  
+
+  margin: auto;
 
   /* top: -3em;
   margin: auto;
@@ -104,4 +126,19 @@ main{
 
 .errors>li{
  list-style-type: none; 
+}
+
+input[type="file"]{
+  display: none;
+}
+
+.row label{
+  background: #eee;
+  padding: 2px 3px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  font-size: small;
+  width: 4.5em;  
+  cursor: pointer;
+  text-align: center;  
 }

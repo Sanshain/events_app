@@ -147,7 +147,8 @@ AUTH_USER_MODEL = 'events_app.Profile'
 
 # EMAIL SETTINGS:
 
-EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+# EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 
 EMAIL_HOST = env('SMTP_HOST')
@@ -156,9 +157,15 @@ EMAIL_PORT = env('SMTP_PORT')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
+
+MEDIA_ROOT = BASE_DIR / 'event_media'
+MEDIA_URL = '/media/'
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }

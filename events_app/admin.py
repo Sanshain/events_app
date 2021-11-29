@@ -21,9 +21,12 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(Action)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'date', 'event']
+    list_display = ['action', 'id', 'date']
     autocomplete_fields = ['user', 'event']
 
     def get_queryset(self, request):
         r: QuerySet = super().get_queryset(request).select_related()
         return r
+
+    def action(self, obj: Action):
+        return f'`{obj.user.username}` joined to `{obj.event.name}`'

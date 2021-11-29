@@ -31,12 +31,15 @@ class Event(models.Model):
 
 
 class Action(models.Model):
+    class Meta:
+        unique_together = ('user', 'event')
+    
     objects: QuerySet
 
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True, max_length=150)
 
 
 # SIGNALS:
